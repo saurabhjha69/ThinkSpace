@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('mcqans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('mcq_id')->constrained();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('mcq_id')->constrained()->cascadeOnDelete();
             $table->string('ans');
             $table->integer('marks');
             $table->boolean('is_correct');

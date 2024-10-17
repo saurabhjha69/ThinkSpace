@@ -119,6 +119,8 @@
                     <label class="block text-sm font-medium text-gray-700">Price</label>
                     <input type="number" name="price" class="w-full mt-1 p-2 border rounded"
                         value="{{ $course->price }}" placeholder="Course Price">
+                        <x-validationError error_name="min_price"></x-validationError>
+                        <x-validationError error_name="max_price"></x-validationError>
                 </div>
 
                 <!-- Estimated Price -->
@@ -127,6 +129,21 @@
                     <input type="number" name="est_price" class="w-full mt-1 p-2 border rounded"
                         value="{{ $course->est_price }}" placeholder="Estimated Price">
                 </div>
+
+
+            </div>
+            <div class="quiz bg-white mb-4 shadow-md rounded-lg p-6">
+                <label for="" class="block text-gray-700 font-bold mb-2">Add Quiz</label>
+                @if ($course->quizzes->count() <= 0)
+                <label for="" class="block text-gray-700 font-bold mb-2">Either you havent created any Quiz or All Quizzes are associated with an Course</label>
+                <x-button href="/quiz" class="bg-purpolis">Click to Create New Quiz</x-button>
+                @endif
+                {{-- <select name="quiz_id"  class="w-full border border-gray-300 p-2 rounded-lg"> --}}
+                    @foreach ($quizzes as $quiz)
+                        <input type="checkbox" {{$quiz->course_id == $course->id ? 'checked' : ''}} name="quizzes[]" value="{{$quiz->id}}">{{$quiz->title}}
+                    @endforeach
+                {{-- </select> --}}
+
             </div>
 
             @if ($course->introvideo)
@@ -143,14 +160,23 @@
                 </div>
             @endif
 
-            <button class="w-full bg-blue-600 text-white p-2 rounded mt-4">Save Changes</button>
+            <div class="btn flex gap-4">
+                <button class="w-full bg-blue-600 text-white p-2 rounded">Save Changes</button>
+                @if ($course->isRejected())
+                <input type="submit" form="courseApprovalForm" value="ReApply For Approval" class="bg-purpolis text-white text-xs px-4 rounded">
+                @endif
+            </div>
+        </form>
+        <form action="/course-approval/reapply/{{$course->id}}" id="courseApprovalForm" method="POST">
+            @csrf
+
         </form>
 
     </div>
     <div class="btn flex justify-center">
         <a href="/course/{{$course->id}}/modules" class=" border border-blue-500 rounded-md px-6 py-1">View Modules</a>
     </div>
-    
+
 </body>
 
 </html>

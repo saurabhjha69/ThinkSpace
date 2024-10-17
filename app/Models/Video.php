@@ -19,6 +19,13 @@ class Video extends Model
     public function submodule(){
         return $this->hasOne(Submodule::class);
     }
+    public function videolog(){
+        return $this->hasOne(VideoUploadLogs::class);
+    }
+    public function isQueued(){
+        return $this->videolog()->where('status','pending')->exists();
+    }
+    
 
     public function stats(){
         return $this->hasMany(VideoStats::class);

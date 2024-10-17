@@ -1,5 +1,5 @@
 @component('layout')
-<div class="bg-white overflow-y-auto p-8 rounded-lg shadow-lg w-[60%]">
+<div class="bg-white overflow-y-auto p-8 rounded-lg mt-10 shadow-lg w-[60%]">
     <h1 class="text-3xl font-bold text-gray-700 mb-6">Edit Quiz</h1>
 
     <!-- Title and Description -->
@@ -153,12 +153,12 @@
                     class="w-full border border-gray-300 rounded-lg px-4 py-2 mb-4">
                 <div class="flex items-center space-x-4">
                     <label class="inline-flex items-center">
-                        <input type="radio" name="ans{{$key}}" value="1"
+                        <input type="radio" name="ans" value="1"
                         {{$truefalse->ans === 1 ? 'checked' : ''}} class="form-radio text-indigo-500">
                         <span class="ml-2">True</span>
                     </label>
                     <label class="inline-flex items-center">
-                        <input type="radio" name="ans{{$key}}" value="0"
+                        <input type="radio" name="ans" value="0"
                         {{$truefalse->ans === 0 ? 'checked' : ''}}  class="form-radio text-indigo-500">
                         <span class="ml-2">False</span>
                     </label>
@@ -169,16 +169,16 @@
         <form id="quizForm" action="/quiz/edit/{{ $quiz->id }}" method="POST">
             @csrf
             @method('PUT')
-            
-            
+
+
         </form>
     </div>
 </div>
 <!-- Add Question Button -->
-<div class="addQuestionsDiv fixed right-10 top-0 bg-white rounded-lg shadow-lg w-[30%] h-80 p-8">
+<div class="addQuestionsDiv fixed right-10 top-24 bg-white rounded-lg shadow-lg w-[28%] h-50 p-4">
     <div class=" space-y-4">
         <div class="options flex justify-between gap-3">
-            
+
             <select class="border border-gray-700 rounded-md" name="questionOptions" id="addQuestionOption">
                 <option value="truefalse">True/False</option>
                 <option value="mcq">MCQ</option>

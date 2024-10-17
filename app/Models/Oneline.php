@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Oneline extends Model
 {
@@ -19,7 +20,7 @@ class Oneline extends Model
         return $this->hasMany(Onelineans::class);
     }
 
-    public function usersAnswer(){
-        return $this->answeredOnelineans()->where('user_id', \Illuminate\Support\Facades\Auth::user()->id);
+    public function usersAnswer($id){
+        return $this->answeredOnelineans()->where('user_id', Auth::user()->id)->where('oneline_id', $id)->first();
     }
 }

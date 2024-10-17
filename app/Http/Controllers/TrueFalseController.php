@@ -28,16 +28,22 @@ class TrueFalseController extends Controller
     }
 
     public function update(Truefalse $truefalse){
+        // dd(request());
         request()->validate([
             'question' =>'required',
             'ans' =>'required',
         ]);
         $truefalse->update([
             'question' => request('question'),
-            'ans' => (int)request('ans'),
+            'ans' => request('ans') == '0' ? 0 : 1,
         ]);
-        
-        return redirect('quiz/'.$truefalse->quiz->id);
+        $res = $truefalse->save();
+        if(!$res){
+            flash()->error('Failed to update the question');
+            return back();
+        }
+        flash()->success('Question updated successfully');
+        return redirect()->back();
     }
 
     public function destroy($id){

@@ -19,9 +19,9 @@ class Mcq extends Model
     public function answeredMcqs(){
         return $this->hasMany(Mcqans::class);
     }
-    public function usersAnswer(){
-        return $this->answeredMcqs()->where('user_id', Auth::user()->id)->where('mcq_id', $this->id);
+    public function usersAnswer($id){
+        return $this->answeredMcqs()->where('user_id', Auth::id())->where('mcq_id', $id)->first();
     }
 
-    
+
 }

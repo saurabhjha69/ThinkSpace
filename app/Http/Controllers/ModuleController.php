@@ -24,8 +24,29 @@ class ModuleController extends Controller
 
     }
 
-    public function store(Request $request){
+    public function store(){
+        request()->validate([
+            'module.*.title' => 'required',
+            'course_id' => 'required'
+        ]);
 
+        $course = Course::find(request('course_id'));
+        $counter = 0;
+        if (request('module') && is_array(request('module'))) {
+            foreach (request('module') as $index => $module) {
+                $moduleInstance = new Module();
+                $moduleInstance->course_id = $course->id;
+                $moduleInstance->title = $module['title'];
+                $moduleInstance->order = $index;
+                $res = $moduleInstance->save();
+                if (!$res) {
+                    return redirect()->back()->with('fail', 'Failed to Add Module' . $module['title']);
+                }
+                $counter++;
+            }
+        }
+        flash()->success('Successfully Added ' . $counter . ' Module');
+        return redirect('course/' . $course->id . '/modules');
     }
 
     public function show($id){
@@ -43,7 +64,7 @@ class ModuleController extends Controller
             'category_id' => 'required',
             'submodule.*.title' => 'required',
         ]);
-        
+
         $module->title = request('module_title');
 
         if(request('submodule') && is_array(request('submodule'))){
@@ -57,24 +78,25 @@ class ModuleController extends Controller
                 $submoduleInstance->save();
                 if(isset($submodule['file'])){
                     $file = $submodule['file'];
-                    
+
                     $filename = $file->getClientOriginalName();
                     $path = 'M'.$module->id.'/S'.$submoduleInstance->id.'/'.$filename;
                     Storage::disk('local')->put($path, file_get_contents($file));
                     $filepath = storage_path('app/' . $path);
-                                
+
                     // Get full path to the stored file
                     $cloudinaryPath = 'LMS/Categories/' . Category::find(request('category_id'))->name . '/' . $module->course_id . '/modules/' . $module->id . '/submodules/' . $submoduleInstance->id . '/' . 'video/';
                     $videouploadlog = new VideoUploadLogs();
                     $videouploadlog->submodule_id = $submoduleInstance->id;
                     $videouploadlog->save();
                     UploadVideoToCloudinary::dispatch($filepath,$cloudinaryPath,$submoduleInstance->id,$videouploadlog->id,false);
-                    
-                
+
+
             }
         }
         $module->save();
-        return response()->json(['message' => 'Module updated successfully']);
+        flash()->success('Module Updated Successfully');
+        return redirect('/modules/'.$module->id);
     }}
 
     public function destroy(){

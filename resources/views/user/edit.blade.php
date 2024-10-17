@@ -30,7 +30,7 @@
                     <x-validationError error_name="email"></x-validationError>
                 </div>
             </div>
-    
+
             {{-- <!-- Phone & Expiry Date -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
@@ -44,7 +44,7 @@
                         placeholder="Expiry Date">
                 </div>
             </div> --}}
-    
+
             <!-- Password & Confirm Password -->
             {{-- <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
@@ -59,7 +59,7 @@
                         placeholder="Confirm Password" required>
                 </div>
             </div> --}}
-    
+
             <!-- Role & Status -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
@@ -77,24 +77,24 @@
                         <x-validationError error_name="role[3]"></x-validationError>
                         <x-validationError error_name="role[4]"></x-validationError>
                     </div>
-    
+
                 </div>
-               
+
                 <div>
                     <label for="status" class="block mb-1 font-medium">Status</label>
                     <select id="status" name="is_active" class="w-full border border-gray-300 rounded-md p-3" required>
-                        <option value="true" {{$user->is_active == 'true' ? 'selected' : ''}}>Active</option>
-                        <option value="false" {{$user->is_active == 'false' ? 'selected' : ''}}>Suspended</option>
+                        <option value="true" {{$user->is_active == 1 ? 'selected' : ''}}>Active</option>
+                        <option value="false" {{$user->is_active == 0 ? 'selected' : ''}}>Suspended</option>
                     </select>
                 </div>
             </div>
-    
+
             <!-- Submit Button -->
             <div class="flex justify-end">
                 <input type="submit" class="bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700">
             </div>
         </form>
     </div>
-    
+
 </body>
 </html>

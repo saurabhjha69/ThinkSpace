@@ -2,7 +2,7 @@
 
 <div class="course1 flex items-center gap-4 py-4 ">
     <div class="img object-cover">
-        <img src="{{ $img }}" height="{{$img_h}}" width="{{$img_w}}" class="rounded-lg" alt="">
+        <img src="{{ $img }}" height="{{$img_h}}" width="{{$img_w}}" class="rounded-lg  " alt="">
     </div>
     <div class="course-info flex flex-col justify-between">
         <h1 class="text-xl font-bold">{{ $title }}</h1>

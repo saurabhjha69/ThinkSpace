@@ -66,23 +66,3 @@ window.submitReview = function(course_id,user_id) {
     }, 1000);
 }
 
-window.markAsComplete = function(course_id,module_id,submodule_id,user_id){
-    console.log('checked')
-    const csrfTokenElement = document.querySelector('meta[name="csrf-token"]');
-    const csrfToken = csrfTokenElement ? csrfTokenElement.getAttribute('content') : null;
-    if (!csrfToken) {
-        console.error("CSRF token not found. Cannot send request.");
-        return;
-    }
-    fetch('/mark-submodule-complete', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': csrfToken
-        },
-        body: JSON.stringify({ course_id: course_id, module_id: module_id,submodule_id: submodule_id, user_id : user_id})
-    });
-    setInterval(() => {
-        location.reload();
-    }, 1000);
-}

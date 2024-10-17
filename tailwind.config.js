@@ -9,6 +9,7 @@ export default {
     extend: {
       colors: {
         primary: '#990011',
+        purpolis : '#925fe2',
         secondary: '#FCF6F5',
       }
     },

@@ -14,4 +14,7 @@ class VideoStats extends Model
     public function video(){
         $this->belongsTo(Video::class);
     }
+    public function user(){
+        $this->belongsTo(User::class,'id','user_id');
+    }
 }

@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('attemptedquizzes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('quiz_id')->constrained();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('quiz_id')->constrained()->cascadeOnDelete();
             $table->integer('marks');
             $table->boolean('is_completed');
             $table->timestamps();

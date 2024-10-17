@@ -39,7 +39,7 @@
                             <label class="block text-gray-700">Video:</label>
                             <input type="file" name="submodule[{{$submodule->order}}][file]" class="w-full p-2 border border-gray-300 rounded"  value="null" onchange="previewVideo(event,'video{{$submodule->order}}')">
                             <video id="video{{$submodule->order}}" controls class=" mx-auto">
-                                <source src="{{$submodule->video->url}}"  type="video/mp4">
+                                <source src="{{$submodule->video?->url}}"  type="video/mp4">
                             </video>
                         </div>
                         <!-- End of Submodule Template -->

@@ -69,7 +69,7 @@
 
 
     </div>
-    <form class="max-w-5xl mx-auto bg-white rounded-lg shadow-md divide-y-2" action="/course/modules/add" method="POST"
+    <form class="max-w-5xl mx-auto bg-white rounded-lg shadow-md divide-y-2"  action="/course/modules/add" method="POST"
         id="modules" count={{ $course->modules->count() }}>
         @csrf
 

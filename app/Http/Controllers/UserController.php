@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Course;
 use App\Models\Permission;
 use App\Models\Role;
 use App\Models\User;
@@ -9,18 +10,52 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
 
 class UserController extends Controller
 {
     public function index()
-    {
-        // $user_roles_name = DB::table('user_roles')
-        //     ->join('roles', 'user_roles.role_id', '=', 'roles.id')
-        //     ->join('users', 'user_roles.user_id', '=', 'users.id')
-        //     ->select('user_roles.role_id', 'roles.name as rolename', 'user_roles.user_id', 'users.name as username', 'users.email')
-        //     ->get();
-        return view('team', ['users' => User::all()]);
+{
+    request()->validate([
+        'filterByRole' => Rule::in(['Admin','Learner','Instructor','All']),
+        'filterByStatus' => Rule::in(['0','1','All']),
+    ],
+[
+    'filterByRole' => 'Filter role is Invalid, please select a valid role or select All',
+    'filterByStatus' => 'Filter status is Invalid, please select a valid status or select All',
+]);
+
+    $users = User::with('roles')
+        ->when(request('search'), function($query) {
+            $query->where('username', 'like', request('search') . '%');
+        })
+        ->when(request('filterByRole') && request('filterByRole') != 'All', function($query) {
+            $query->whereHas('roles', function($q) {
+                $q->where('name', request('filterByRole'));
+            });
+        })
+        ->when(request()->has('filterByStatus') && request('filterByStatus') != 'All', function($query) {
+            $query->where('is_active', request('filterByStatus'));
+        })
+        ->orderBy('created_at', 'asc')
+        ->simplePaginate(10)
+        ->appends(request()->query());
+
+    return view('team', ['users' => $users]);
+}
+
+    public function suspend(User $user){
+        if($user->is_active){
+            $user->is_active = false;
+            $user->save();
+            flash()->success( 'Successfully Suspended User '.$user->username);
+        }else{
+            $user->is_active = true;
+            $user->save();
+            flash()->success( 'Successfully Reactivated User '.$user->username);
+        }
+        return redirect('/user/'.$user->id);
     }
 
     public function create()
@@ -40,6 +75,7 @@ class UserController extends Controller
             'username' => request('username'),
             'email' => request('email'),
             'password' => bcrypt(request('password')),
+            'is_active' => true,
         ]);
 
         $roles = Role::all()->pluck('id');
@@ -56,15 +92,21 @@ class UserController extends Controller
         return redirect('user/create');
     }
 
-    public function show($id)
+    public function show(User $user)
     {
+        $courses = Course::whereDoesntHave('users', function ($query) use ($user) {
+            $query->where('users.id', $user->id);
+        })->get();
 
+        return view('user.show',['user'=>$user,'existingcourses' => $courses]);
     }
+
+
 
     public function edit(User $user)
     {
 
-        
+
         return view('user.edit', ['user' => $user, 'roles' => Role::all()]);
     }
 
@@ -102,10 +144,23 @@ class UserController extends Controller
         $users_id = '['.request('user_ids').']';
         $user_ids_array = json_decode($users_id,true);
         if($user_ids_array!=null){
-            foreach($user_ids_array as $user_id){
-                User::destroy($user_id);
+            try{
+                foreach($user_ids_array as $user_id){
+                    DB::table('deleted_users')->insert([
+                        'username' => User::find($user_id)->username,
+                        'email' => User::find($user_id)->email,
+                        'deleted_at' => now(),
+                    ]);
+                    $user = User::find($user_id);
+                    $user->delete();
+                }
+                flash()->success( 'Successfully Deleted Users');
+                return redirect()->back();
             }
-            return redirect()->back();
+            catch(\Exception $e){
+                flash()->error( 'Failed to Delete Users');
+                return redirect()->back();
+            }
         }
         return redirect()->back();
 

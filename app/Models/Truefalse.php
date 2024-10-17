@@ -20,7 +20,7 @@ class Truefalse extends Model
         return $this->hasMany(Truefalseans::class);
     }
 
-    public function usersAnswer(){
-        return $this->answeredTruefalseans()->where('user_id', Auth::user()->id);
+    public function usersAnswer($id){
+        return $this->answeredTruefalseans()->where('user_id', Auth::id())->where('truefalse_id', $id)->first();
     }
 }

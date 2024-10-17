@@ -30,7 +30,7 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->text('thumbnail_url');
             $table->foreignId('video_id')->constrained('videos','id')->nullable();
-            $table->softDeletes(); // Add soft delete column for tracking deleted courses.
+            $table->softDeletes();
             $table->timestamps();
         });
     }

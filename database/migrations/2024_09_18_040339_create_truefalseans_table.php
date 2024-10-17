@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('truefalseans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('truefalse_id')->constrained();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('truefalse_id')->constrained()->cascadeOnDelete();
             $table->boolean('ans');
             $table->integer('marks');
             $table->boolean('is_correct');

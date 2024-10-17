@@ -1,4 +1,4 @@
-@component('layout')
+
 <div class="bg-white overflow-y-auto p-8 rounded-lg shadow-lg w-[60%]">
     <h1 class="text-3xl font-bold text-gray-700 mb-6">{{$quiz->title}}</h1>
 
@@ -145,7 +145,7 @@
         </div>
     </form>
 </div>
-<!-- Add Question Button -->
+
 <div class="addQuestionsDiv fixed right-10 top-0 bg-white rounded-lg shadow-lg w-[30%] h-80 p-8">
     <div >
         <button type="submit" form="quizAttemptForm" id="submitQuizAttemptForm"
@@ -156,4 +156,3 @@
 </div>
 
 
-@endcomponent

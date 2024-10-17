@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('multians', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('multianswer_id')->constrained();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('multianswer_id')->constrained()->cascadeOnDelete();
             $table->string('choice1')->nullable();
             $table->string('choice2')->nullable();
             $table->string('choice3')->nullable();

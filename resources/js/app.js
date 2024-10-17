@@ -138,7 +138,7 @@ function attachSubModuleListener(button) {
                     <input type="file" name="M[${moduleCounter}][S][${submcount}][file]" class="w-full border border-gray-300 p-2 rounded-lg">
                 </div>
             </div>`;
-        
+
         subModulesDiv.appendChild(newSubmodule);
         attachArrowListener(newSubmodule.querySelector(".arrow"));
         attachDeleteListener(newSubmodule.querySelector(".delete"));
@@ -184,10 +184,7 @@ document.querySelector(".addModule").addEventListener("click", function () {
                 <label class="block text-gray-700 font-bold mb-2">Module Title</label>
                 <input type="text" name="M[${moduleCounter+1}][title]" class="w-full border border-gray-300 p-2 rounded-lg" placeholder="Module Title">
             </div>
-            <div class="mb-4">
-                <label class="block text-gray-700 font-bold mb-2">Module File</label>
-                <input type="file" name="M[${moduleCounter+1}][file]" class="w-full border border-gray-300 p-2 rounded-lg" placeholder="Module File/Video" accept="video/*">
-            </div>
+            
             <div class="submodules mb-4" parent="M${moduleCounter + 1}" submcount="0">
             </div>
             <p class="addSubModule bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded" parent="M${moduleCounter + 1}">Add Submodule</p>

@@ -39,6 +39,9 @@ class Module extends Model
                 $completedSubModule +=1;
             }
         }
+        if($submoduleCount === 0){
+            return 0;
+        }
         $completedPercentage = ($completedSubModule*100) / $submoduleCount;
         return $completedPercentage;
     }
