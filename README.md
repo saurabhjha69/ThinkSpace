@@ -13,10 +13,9 @@
    ```bash
    cd path/to/your/laravel-app
 2. Install the required dependencies using Composer:
-```bash
+    ```bash
     composer install
-```
-If you don’t have Composer installed, follow the official instructions to install it.
+## Step 1: Install Dependencies 
 
 
 ## About Laravel
