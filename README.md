@@ -95,9 +95,7 @@ Open your browser and visit the provided URL.
    ```bash
    chmod -R 775 storage bootstrap/cache
    ```
-``` 
 
-Copy and paste this into your `.md` file, and it will render correctly with the proper Markdown syntax.
 
 ## About Laravel
 
