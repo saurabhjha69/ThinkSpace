@@ -15,18 +15,6 @@
 2. Install the required dependencies using Composer:
     ```bash
     composer install
-## Step 2: Set Up Environment Variables
-1. Create a copy of the .env.example file and rename it to .env:
-    ```bash
-    cp .env.example .env
-
-2. Install the required dependencies using **Composer**:  
-   ```bash
-   composer install
-   ```
-   **Note:** If you don’t have Composer installed, follow the [official instructions](https://getcomposer.org/download/) to install it.
-
----
 
 ## Step 2: Set Up Environment Variables
 1. Create a copy of the `.env.example` file and rename it to `.env`:  
