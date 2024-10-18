@@ -7,7 +7,7 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## SetUp
+# SetUp
 ## Step 1: Install Dependencies
 1. Open your terminal and navigate to the project directory:
    ```bash
@@ -15,7 +15,20 @@
 2. Install the required dependencies using Composer:
     ```bash
     composer install
-## Step 1: Install Dependencies 
+## Step 2: Set Up Environment Variables
+1. Create a copy of the .env.example file and rename it to .env:
+    ```bash
+    cp .env.example .env
+2. Stripe Keys:
+    ```bash
+    STRIPE_KEY=pk_test_51PySJ6FDSWNoYbpZqrvnpPNT2kVQ6STMrX1kicgjxR8uzQvpquYpTeZ77J6xk8iOJgWd33FAJDbogoFfUlLzRbHb009cQZ2Uhc
+    STRIPE_SECRET=sk_test_51PySJ6FDSWNoYbpZacsKpojbRFfP2m5uacznkWIoLwXg2FxgST5IvdXFbjzWCl2NBPlMcokuE9PvuH8ekZSvWeSg00byZoZkFU
+
+4. Cloudinary Keys:
+   ```bash
+    CLOUDINARY_URL=cloudinary://667111647831232:qus-yXREU1DAquO7fIzrlnvmyv8@de2fnaud6
+
+
 
 
 ## About Laravel
