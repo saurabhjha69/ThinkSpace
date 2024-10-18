@@ -9,6 +9,12 @@
 
 ## SetUp
 
+# How to Start a Cloned Laravel App
+
+## Step 1: Install Dependencies
+1. Open your terminal and navigate to the project directory:
+   ```bash
+   cd path/to/your/laravel-app
 
 
 ## About Laravel
