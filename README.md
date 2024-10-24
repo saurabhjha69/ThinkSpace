@@ -17,7 +17,7 @@
    ```ini
    STRIPE_KEY=pk_test_51PySJ6FDSWNoYbpZqrvnpPNT2kVQ6STMrX1kicgjxR8uzQvpquYpTeZ77J6xk8iOJgWd33FAJDbogoFfUlLzRbHb009cQZ2Uhc
    STRIPE_SECRET=sk_test_51PySJ6FDSWNoYbpZacsKpojbRFfP2m5uacznkWIoLwXg2FxgST5IvdXFbjzWCl2NBPlMcokuE9PvuH8ekZSvWeSg00byZoZkFU
-   CLOUDINARY_URL=cloudinary://667111647831232:qus-yXREU1DAquO7fIzrlnvmyv8@de2fnaud6
+   CLOUDINARY_URL=cloudinary://783794122891497:AnEZ8PkXLWL3Nz9TmPu5c11kXKE@dxejpzxjj
    ```
 
 ---
