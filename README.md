@@ -15,9 +15,9 @@
    ```
 2. Open the `.env` file and configure the following values:  
    ```ini
-   STRIPE_KEY=pk_test_51PySJ6FDSWNoYbpZqrvnpPNT2kVQ6STMrX1kicgjxR8uzQvpquYpTeZ77J6xk8iOJgWd33FAJDbogoFfUlLzRbHb009cQZ2Uhc
-   STRIPE_SECRET=sk_test_51PySJ6FDSWNoYbpZacsKpojbRFfP2m5uacznkWIoLwXg2FxgST5IvdXFbjzWCl2NBPlMcokuE9PvuH8ekZSvWeSg00byZoZkFU
-   CLOUDINARY_URL=cloudinary://783794122891497:AnEZ8PkXLWL3Nz9TmPu5c11kXKE@dxejpzxjj
+   STRIPE_KEY=
+   STRIPE_SECRET=
+   CLOUDINARY_URL=
    ```
 
 ---
